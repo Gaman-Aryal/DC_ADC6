@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.news{
+  padding-left: 10%;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+.welcoming{
+  float: left;
+  padding-left: 20px;
+  padding-top: 100px;
+  
+}
+.rooms-entry{
+  height: 300px;
+  width: 100%;
+}
+.content{
+  float: left;
+}
+.content1{
+  padding-left: 350px;
+  padding-top: 10px;
+}
+
+.rooms{
+  margin-top: 15px;
+}
+.a_rooms{
+  margin-left: 7%;
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;
+  }
+  .rooms-entry{
+    padding-left: 10px;
+  }
+  .raw{
+    padding-top: 30px;
+  }
+}
+</style>
+</head>
+<body>
+  
+  {%if source%}
+
+  <div class="raw">
+    <a href="/">Return back to homepage</a>
+    
+</div>
+<h1 >Available Rooms:</h1>
+        {% for x in source %}
+          <form  method="POST">
+          {% csrf_token %}
+          <div class="rooms">
+            <div class="rooms-entry" >
+              <!-- {{x.file}} -->
+              <div class="content">
+                <img src='{{x.file}}' alt="image" class="img-fluid" height="300px" width="300px">
+              </div>
+            
+              <div class="content1">
+                <b>Owner Name :  </b>{{x.Room_owner}} <br>
+                <b>Published Date :  </b>{{x.pub_date}} <br>
+                <b>Location :  </b>{{x.Room_location}} <br>
+                <b>Description :  </b>{{x.Room_desc}} <br>
+                <b>Price :  </b><strong>${{x.Room_price}}</strong> <br><br>
+                <a href="reserve/cart/{{x.pk}}/">Book This</a><br><br>
+                <a href="rooms/delete/{{x.pk}}">Delete this room detail</a><br><br>
+                <a href="/rooms/update_form/{{x.pk}}" role="button">Update room details in uploaded form</a> <br><br>
+                <a  href="http://127.0.0.1:8000{{x.file}}"> View Photo </a><br><br>
+                <!-- <a href="http://127.0.0.1:8000{{x.file}}" download>Download this image</a> -->
+                <a href="C:\Users\Asus\Downloads\DC_ADC6\media\6-1fe104-1024x768.jpg" download="6-1fe104-1024x768.jpg">Download this image</a>
+              </div>
+            
+            </div>
+        __________________________________________________________________________________________________________________________________________________________________________________
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+        <br>
+        </div>
+
+            {% empty %}
+                There are no Rooms available.
+        {% endfor %}
+        
+        {% else %}
+
+
+{% if user.is_authenticated  %}
+  <div class="topnav">
+    <a href="" class="active" >Home</a>
+    <a href="/rooms/photoupload_form/">Upload Rooms</a>
+      <a href="/users_details/">Users</a>
+      <a href="/logout_redirect/">Log Out</a>
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="search/" method=" GET">
+            <input type="text" class="form-control" placeholder="Search " name="search">
+          </form>
+        </div>
+      </div>
+      
+    </div>
+    <div class="welcoming" style="color: rgb(108, 28, 212);">
+      Welcome, {{user.first_name|upper}}
+    </div>
+  <div class="news">
+    <!-- <div class="welcoming" >
+      
+    </div> -->
+
+      {% for x in Room_list%}
+      <form  method="POST">
+        {% csrf_token %}
+        <div class="a_rooms">
+          
+          <br>
+            <div class="rooms-entry" >
+              <!-- {{x.file}} -->
+              <div class="content">
+                <img src='{{x.file}}' alt="image" class="img-fluid" height="300px" width="300px">
+              </div>
+              
+              <div class="content1">
+                <b>Owner Name :  </b>{{x.Room_owner}} <br>
+                <b>Published Date :  </b>{{x.pub_date}} <br>
+                <b>Location :  </b>{{x.Room_location}} <br>
+                <b>Description :  </b>{{x.Room_desc}} <br>
+                <b>Price :  </b><strong>${{x.Room_price}}</strong> <br><br>
+                <a href="reserve/cart/{{x.pk}}/">Book This</a><br><br>
+                <a href="rooms/delete/{{x.pk}}">Delete this room detail</a><br><br>
+                <a href="/rooms/update_form/{{x.pk}}" role="button">Update room details in uploaded form</a> <br><br>
+                <a  href="http://127.0.0.1:8000{{x.file}}"> View Photo </a><br><br>
+                <a href="/rooms/download/{{x.pk}}/" download>Download this image</a>
+              </div>
+              <!-- media/Advantage and Disadvantage of Mongodb.docx -->
+              
+            </div>
+          =============================================================================================================================
+          <br>
+        </div>
+
+
+      {% empty %}
+            <h2> There are no Rooms available.</h2>
+      {% endfor %}
+      </form>
+  </div>
+
+
+{% else %}
+    <div class="topnav">
+        <a href="" class="active" >Home</a>
+        <a href="/rooms/photoupload_form/">Upload Rooms</a>
+        <a href="/registration/login/">Login</a>
+     <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="rooms/search/" method=" GET">
+            <input type="text" class="form-control" placeholder="Search " name="search">
+          </form>
+        </div>
+      </div>
+  </div>
+  <h1 style="color:red">Please login </h1>
+  <div class="news"><br><br>
+      
+    {% for x in Room_list %}
+      <form  method="POST">
+        {% csrf_token %}
+        <div class="rooms">
+          
+          <br>
+            <div class="rooms-entry">
+              <!-- {{x.file}} -->
+              <div class="content">
+                <img src='{{x.file}}' alt="image" class="img-fluid" height="300px" width="300px">
+              </div>
+              
+              <div class="content1">
+                <b>Owner Name :  </b>{{x.Room_owner}} <br>
+                <b>Published Date :  </b>{{x.pub_date}} <br>
+                <b>Location :  </b>{{x.Room_location}} <br>
+                <b>Description :  </b>{{x.Room_desc}} <br>
+                <b>Price :  </b><strong>${{x.Room_price}}</strong> <br><br>
+                <a href="#" role="button">View more details</a> <br><br><br>
+                <a href="/registration/login/" role="button">Book Room now</a> <br><br>
+              </div>
+              
+              
+            </div>
+          =============================================================================================================================
+          <br>
+        </div>
+    {% empty %}
+               <h2> There are no Rooms available.</h2>
+    {% endfor %}
+    </form>
+  </div>
+{% endif %}
+{% endif %}
+          </form>
+</body>
+</html>
