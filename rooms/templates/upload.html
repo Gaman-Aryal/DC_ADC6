@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+    <title>Rentit</title>
+</head>
+<body>
+
+
+{% load static %}
+
+
+
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_image_url }}">{{ uploaded_image_url }}</a></p>
+  {% endif %}
+
+
+<form class="form-horizontal" method="POST" action="/rooms/Photo_upload_result/" enctype='multipart/form-data'>
+    {% csrf_token %}
+<fieldset>
+
+<!-- Form Name -->
+<legend>Rent-it</legend>
+
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="owner_name">Owner Name</label>
+  <div class="col-md-4">
+
+    <input id="owner_name" name="owner_name" placeholder="Owner Name" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="location">Location</label>
+  <div class="col-md-4">
+
+    <input id="location" name="location" placeholder="Location" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="phone_number">Phone_Number</label>
+  <div class="col-md-4">
+    <input id="phone_number" name="phone_number" placeholder="Phone Number" class="form-control input-md" required="" type="tel">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="price">Price</label>
+  <div class="col-md-4">
+  <input id="price" name="price" placeholder="Price" class="form-control input-md" required="" type="number">
+    <br>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="pub_date">Published Date</label>
+  <div class="col-md-4">
+  <input id="pub_date" name="pub_date" placeholder="Published Date" class="form-control input-md" required="" type="date">
+    <br>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="desc">Description</label>
+  <div class="col-md-4">
+    <input id="desc" name="desc" placeholder="Description" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+ <!-- File Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="image">Upload Picture</label>
+  <div class="col-md-4">
+    <input id="image" name="image" class="input-file" type="file">
+  </div>
+</div>
+
+
+        <!-- Button -->
+        <div class="form-group">
+        <div class="col-md-4" >
+            <input  type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary" value="Upload File">
+        </div>
+        </div>
+
+</fieldset>
+</form>
+</body>
+</html>
