@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    img{
+      height: "50px";
+      width: "50px";
+    }  
+    form{
+      height: 80px;
+    }
+    .rooms-entry{
+      height: 305px;
+      width: 100%;
+      
+    }
+    .content{
+      float: left;
+      padding-left: 23px;
+    }
+    .content1{
+      padding-left: 350px;
+      padding-top: 10px;
+    }
+      
+    </style>
+</head>
+<body>
+    <div>
+        <a href="/">Return back to homepage</a>
+        
+    </div>
+    <h1 >Available Rooms:</h1>
+      {%if source%}
+        {% for x in source %}
+          <form  method="POST">
+          {% csrf_token %}
+          <div class="rooms">
+            <div class="rooms-entry" >
+              <!-- {{x.file}} -->
+              <div class="content">
+                <img src='{{x.file}}' alt="image" class="img-fluid" height="300px" width="300px">
+              </div>
+            
+              <div class="content1">
+                <b>Owner Name :  </b>{{x.Room_owner}} <br>
+                <b>Published Date :  </b>{{x.pub_date}} <br>
+                <b>Location :  </b>{{x.Room_location}} <br>
+                <b>Description :  </b>{{x.Room_desc}} <br>
+                <b>Price :  </b><strong>${{x.Room_price}}</strong> <br><br>
+                <a href="/reserve/cart/{{x.pk}}/">Book This</a><br><br>
+                <a href="/rooms/delete/{{x.pk}}">Delete this room detail</a><br><br>
+                <a href="/rooms/update_form/{{x.pk}}" role="button">Update room details in uploaded form</a> <br><br>
+                <a  href="http://127.0.0.1:8000{{x.file}}"> View Photo </a><br><br>
+                <a href="/rooms/download/{{x.pk}}/" download>Download this image</a>
+              </div>
+            
+            </div>
+        __________________________________________________________________________________________________________________________________________________________________________________
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+        <br>
+        </div>
+
+            {% empty %}
+                There are no Rooms available.
+        {% endfor %}
+        
+        {% endif %}
+
+    
+</body>
+</html>

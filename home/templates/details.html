@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    img{
+      height: "50px";
+      width: "50px";
+    }  
+    form{
+      height: 80px;
+    }
+    .field1{
+
+    } 
+    .return{
+        padding-top: 50px;
+    }
+    .field{
+        margin-top: 35px;
+        margin-left: 40px;
+    }
+    
+    </style>
+</head>
+
+    <div class="return">
+        <a href="/">Return back to homepage</a>
+        
+    </div>
+    <table class="field" style=" width: fit-content;" >
+        <tr class="head">
+            <td>
+                <strong> All Buyer's Detail </strong><br>
+                -----------------------------------
+            </td>
+            <td>
+                <strong>All Owner's Detail</strong><br>
+                ----------------------------------
+            </td>
+        </tr>
+        <tr>
+            <td height="50px">
+                <div class="field1">
+                    {% for x in buyer %}
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <div class="rooms">
+                            <div class="rooms-entry">
+                                <b>Buyer's ID :  </b>{{x.id}}<br>
+                                <b>Buyer Name :  </b>{{x.First_Name}} {{x.Last_Name}} <br>
+                                <b>Username :  </b>{{x.Username}} <br>
+                                <b>Password :  </b>{{x.Password}} <br>
+                                <b>Phone Number :  </b>{{x.Phone_number}} <br>
+                                <b>E-Mail :  </b>{{x.E_mail}} <br>
+                                <b>Gender :  </b>{{x.Gender}} <br><br>
+                                +++++++++++++++++++++++++++++++++++
+                            </div>
+                        </div>
+                            {% empty %}
+                                There are no Users available.
+                        {% endfor %}
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="field2">
+                    {% for x in owner %}
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <div class="rooms" >
+                            <div class="rooms-entry" >
+                                <b>Owner's ID :  </b>{{x.id}}<br>
+                                <b>Owner Name :  </b>{{x.First_Name}} {{x.Last_Name}} <br>
+                                <b>Username :  </b>{{x.Username}} <br>
+                                <b>Password :  </b>{{x.Password}} <br>
+                                <b>Phone Number :  </b>{{x.Phone_number}} <br>
+                                <b>E-Mail :  </b>{{x.E_mail}} <br>
+                                <b>Gender :  </b>{{x.Gender}} <br><br>
+                                +++++++++++++++++++++++++++++++++++
+                            </div>
+                        </div >
+                            {% empty %}
+                                There are no Owner available.
+                        {% endfor %}
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>
